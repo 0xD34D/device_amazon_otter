@@ -67,7 +67,9 @@ PRODUCT_PACKAGES += \
     iontest \
     busybox \
 
-
+# add init.d scripts
+PRODUCT_COPY_FILES += \
+	device/amazon/otter/prebuilt/etc/init.d/01fixmac:system/etc/init.d/01fixmac \
 
 # Root
 PRODUCT_COPY_FILES += \
