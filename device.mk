@@ -101,6 +101,10 @@ PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh \
     device/amazon/otter/prebuilt/bin/strace:/system/bin/strace \
 
+# Prebuilts /system/xbin
+PRODUCT_COPY_FILES += \
+    device/amazon/otter/prebuilt/xbin/busybox:/system/xbin/busybox \
+
 # Prebuilts /system/etc
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/etc/dbus.conf:/system/etc/dbus.conf \
