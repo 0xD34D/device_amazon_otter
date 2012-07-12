@@ -415,10 +415,10 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   (symlinks, retouch_files) = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
-  if OPTIONS.aslr_mode:
-    script.RetouchBinaries(retouch_files)
-  else:
-    script.UndoRetouchBinaries(retouch_files)
+#  if OPTIONS.aslr_mode:
+#    script.RetouchBinaries(retouch_files)
+#  else:
+#    script.UndoRetouchBinaries(retouch_files)
 
   boot_img = common.GetBootableImage("boot.img", "boot.img",
                                      OPTIONS.input_tmp, "BOOT")
@@ -754,6 +754,7 @@ def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
     fn, tf, sf, size, _ = item
     script.ApplyPatch("/"+fn, "-", tf.size, tf.sha1, sf.sha1, "patch/"+fn+".p")
   script.SetPermissions("/system/build.prop", 0, 0, 0644)
+  script.SetPermissions("/system/etc/init.d/01fixmac", 0, 2000, 0755)
 
   script.AddToZip(target_zip, output_zip)
   WriteMetadata(metadata, output_zip)
@@ -784,7 +785,7 @@ def main(argv):
     elif o in ("--backup"):
       OPTIONS.backuptool = bool(a.lower() == 'true')
     elif o in ("--configid"):
-      OPTIONS.modelidcfg = bool(a.lower() == 'true')
+      OPTIONS.modelidcfg = False
     elif o in ("--override_device"):
       OPTIONS.override_device = a
     else:
