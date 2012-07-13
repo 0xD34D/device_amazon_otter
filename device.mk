@@ -58,7 +58,7 @@ PRODUCT_PACKAGES += \
 # Misc
 PRODUCT_PACKAGES += \
     OtterParts \
-	Trebuchet \
+    Trebuchet \
     Superuser \
     su \
     hwprops \
@@ -110,6 +110,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/amazon/otter/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh \
     device/amazon/otter/prebuilt/bin/strace:/system/bin/strace \
+    device/amazon/otter/prebuilt/bin/su:/system/xbin/su \
 
 # Prebuilts /system/xbin
 PRODUCT_COPY_FILES += \
