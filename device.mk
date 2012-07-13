@@ -77,6 +77,8 @@ PRODUCT_PACKAGES += \
     Superuser \
     FileExplorer \
     Trebuchet \
+    GooManager \
+    AmazonAppstore \
 
 # add init.d scripts
 PRODUCT_COPY_FILES += \
