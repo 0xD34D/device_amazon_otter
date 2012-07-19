@@ -112,9 +112,10 @@ class EdifyGenerator(object):
         self.script.append('delete("/system/bin/backuptool.functions");')
 
   def RunConfig(self, command):
-    self.script.append('package_extract_file("system/bin/modelid_cfg.sh", "/tmp/modelid_cfg.sh");')
-    self.script.append('set_perm(0, 0, 0777, "/tmp/modelid_cfg.sh");')
-    self.script.append(('run_program("/tmp/modelid_cfg.sh", "%s");' % command))
+    self.script.append('set_perm_recursive(0, 2000, 0755, 0755, "/system/etc/init.d");')
+    #self.script.append('package_extract_file("system/bin/modelid_cfg.sh", "/tmp/modelid_cfg.sh");')
+    #self.script.append('set_perm(0, 0, 0777, "/tmp/modelid_cfg.sh");')
+    #self.script.append(('run_program("/tmp/modelid_cfg.sh", "%s");' % command))
 
   def ShowProgress(self, frac, dur):
     """Update the progress bar, advancing it over 'frac' over the next
@@ -182,9 +183,9 @@ class EdifyGenerator(object):
     fstab = self.info.get("fstab", None)
     if fstab:
       p = fstab[partition]
-      self.script.append('format("%s", "%s", "%s", "%s");' %
+      self.script.append('format("%s", "%s", "%s", "%s", "%s");' %
                          (p.fs_type, common.PARTITION_TYPES[p.fs_type],
-                          p.device, p.length))
+                          p.device, p.length, partition))
 
   def DeleteFiles(self, file_list):
     """Delete all files in file_list."""
