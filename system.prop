@@ -1,4 +1,4 @@
 ro.cwm.forbid_format = /bootloader,/dfs,/backup,/splash
 ro.goo.developerid=0xD34D
 ro.goo.rom=Jandycane-otter
-ro.goo.version=5
+ro.goo.version=6
