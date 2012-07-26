@@ -128,8 +128,6 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilts /system/lib
 #    device/amazon/otter/prebuilt/lib/libion.so:/system/lib/libion.so \
-PRODUCT_COPY_FILES += \
-    device/amazon/otter/prebuilt/lib/libjackpal-androidterm4.so:/system/lib/libjackpal-androidterm4.so \
 
 # Prebuilt /system/media
 PRODUCT_COPY_FILES += \
