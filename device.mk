@@ -187,7 +187,7 @@ PRODUCT_COPY_FILES += $(shell \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
-include vendor/common/themes_common.mk
+include vendor/jandycane/themes_common.mk
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 
