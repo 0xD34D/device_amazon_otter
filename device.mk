@@ -78,7 +78,7 @@ PRODUCT_PACKAGES += \
     FileExplorer \
     Trebuchet \
     GooManager \
-    AmazonAppstore \
+    GoodieBag \
 
 # add init.d scripts
 PRODUCT_COPY_FILES += \
