@@ -67,6 +67,8 @@ PRODUCT_PACKAGES += \
     tinymix \
     tinyplay \
     tinycap
+    OtterParts \
+    Superuser \
 
 # Apps
 PRODUCT_PACKAGES += \
@@ -78,6 +80,12 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/root/init.omap4430.rc:/root/init.omap4430.rc \
     $(DEVICE_FOLDER)/root/init.omap4430.usb.rc:/root/init.omap4430.usb.rc \
     $(DEVICE_FOLDER)/root/ueventd.omap4430.rc:/root/ueventd.omap4430.rc \
+    device/amazon/otter/root/default.prop:/root/default.prop \
+    device/amazon/otter/root/init.rc:/root/init.rc \
+    device/amazon/otter/root/init.usb.rc:/root/init.usb.rc \
+    device/amazon/otter/root/init.omap4430.rc:/root/init.omap4430.rc \
+    device/amazon/otter/root/ueventd.rc:/root/ueventd.rc \
+    device/amazon/otter/root/ueventd.omap4430.rc:/root/ueventd.omap4430.rc \
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -98,8 +106,8 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilts /system/bin
 PRODUCT_COPY_FILES += \
-    $(DEVICE_FOLDER)/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh \
-    $(DEVICE_FOLDER)/prebuilt/bin/strace:/system/bin/strace \
+    device/amazon/otter/prebuilt/bin/fix-mac.sh:/system/bin/fix-mac.sh \
+    device/amazon/otter/prebuilt/bin/strace:/system/bin/strace \
 
 #    $(DEVICE_FOLDER)/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml \
 # Prebuilts /system/etc
@@ -126,6 +134,20 @@ PRODUCT_PACKAGES += \
 
 # AOSP specific
 ifeq ($(TARGET_PRODUCT),full_maserati)
+    device/amazon/otter/prebuilt/etc/audio_policy.conf:/system/etc/audio_policy.conf \
+    device/amazon/otter/prebuilt/etc/dbus.conf:/system/etc/dbus.conf \
+    device/amazon/otter/prebuilt/etc/gps.conf:/system/etc/gps.conf \
+    device/amazon/otter/prebuilt/etc/hosts:/system/etc/hosts \
+    device/amazon/otter/prebuilt/etc/media_codecs.xml:/system/etc/media_codecs.xml \
+    device/amazon/otter/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml \
+    device/amazon/otter/prebuilt/etc/mountd.conf:/system/etc/mountd.conf \
+    device/amazon/otter/prebuilt/etc/vold.fstab:/system/etc/vold.fstab \
+    device/amazon/otter/prebuilt/etc/firmware/ducati-m3.512MB.bin:/system/etc/firmware/ducati-m3.512MB.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-mr.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-plt.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-4-sr.bin \
+    device/amazon/otter/prebuilt/etc/firmware/ti-connectivity/wl1271-nvs_127x.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin.orig \
+    device/amazon/otter/prebuilt/etc/wifi/TQS_S_2.6.ini:system/etc/wifi/TQS_S_2.6.ini \
 
 # Prebuilt /system/media
 PRODUCT_COPY_FILES += \
@@ -136,6 +158,25 @@ endif
 PRODUCT_PACKAGES += \
     Superuser \
     su \
+
+# AOSP specific
+ifndef CM_BUILD
+
+PRODUCT_COPY_FILES += \
+    device/amazon/otter/prebuilt/bin/su:/system/xbin/su \
+    device/amazon/otter/prebuilt/lib/libjackpal-androidterm4.so:/system/lib/libjackpal-androidterm4.so \
+
+PRODUCT_PACKAGES += \
+    parse_hdmi_edid \
+    Term \
+
+# copy all kernel modules under the "modules" directory to system/lib/modules
+PRODUCT_COPY_FILES += $(shell \
+    find device/amazon/otter/modules -name '*.ko' \
+    | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
+    | tr '\n' ' ')
+
+endif
 
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.sf.lcd_density=160 \
@@ -169,6 +210,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 #$(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/amazon/otter/proprietary/imgtec/sgx-imgtec-bins.mk)
+$(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
+
 $(call inherit-product-if-exists, vendor/amazon/otter/otter-vendor.mk)
 $(call inherit-product-if-exists, hardware/ti/omap4xxx/omap4.mk)
 $(call inherit-product-if-exists, device/ti/proprietary-open/wl12xx/wlan/wl12xx-wlan-fw-products.mk)
