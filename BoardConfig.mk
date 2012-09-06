@@ -19,6 +19,7 @@
 BOARD_USES_GENERIC_AUDIO := false
 USE_CAMERA_STUB := true
 BOARD_HAVE_BLUETOOTH := false
+TI_OMAP4_CAMERAHAL_VARIANT := false
 
 # Use the non-open-source parts, if they're present
 -include vendor/amazon/otter/BoardConfigVendor.mk
