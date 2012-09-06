@@ -51,7 +51,6 @@ BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/platform/omap/omap_hsmmc.1/by-name/me
 TARGET_KERNEL_CONFIG := otter_android_defconfig
 TARGET_PREBUILT_KERNEL := device/amazon/otter/kernel
 
-<<<<<<< HEAD
 #KERNEL_EXTERNAL_MODULES:
 #	make -C kernel/amazon/otter/external/wlan/mac80211/compat_wl12xx KERNEL_DIR=$(KERNEL_OUT) KLIB=$(KERNEL_OUT) KLIB_BUILD=$(KERNEL_OUT) ARCH=arm CROSS_COMPILE="arm-eabi-"
 #	mv kernel/amazon/otter/external/wlan/mac80211/compat_wl12xx/compat/compat.ko $(KERNEL_MODULES_OUT)
