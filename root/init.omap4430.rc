@@ -237,5 +237,4 @@ service watchdog /sbin/watchdog
     oneshot
 
 on property:sys.boot_completed=1
-    log "== init.omap4430.rc: on property:sys.boot_completed=1 -----------------------"
 
